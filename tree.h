@@ -43,6 +43,7 @@
 #include "mingw-w64/include/grp.h"
 #include "mingw-w64/include/langinfo.h"
 #include "mingw-w64/include/unistd.h"
+#include <winsock2.h>
 #endif
 /******** end of adapt for mingw-w64*/
 #ifdef __EMX__  /* for OS/2 systems */
