@@ -29,6 +29,7 @@ MAN=tree.1
 # Probably needs to be ${PREFIX}/share/man for most systems now
 MANDIR=${PREFIX}/man
 OBJS=tree.o list.o hash.o color.o file.o filter.o info.o unix.o xml.o json.o html.o strverscmp.o
+OBJEXT = o
 GNULIB_HEADS = \
 	mingw-w64/include/grp.h \
 	mingw-w64/include/langinfo.h \
