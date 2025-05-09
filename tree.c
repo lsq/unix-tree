@@ -162,7 +162,10 @@ int main(int argc, char **argv)
   }
 
   if (strcmp(localecodeset, charset) != 0 && strcmp(charset, "UTF-8") == 0) {
-      setlocale(LC_ALL, ".UTF-8");
+      /* setlocale(LC_ALL, ".UTF-8"); */
+      charset = localecodeset;
+      if (strstr(charset, "936"))
+          charset = "GBK";
   }
 
   lc = (struct listingcalls){
