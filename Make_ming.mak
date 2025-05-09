@@ -53,7 +53,7 @@ OBJS += $(GNULIB_OBJS)
 LDFLAGS?=-s
 CFLAGS?=-ggdb
 CFLAGS?=-O3
-CFLAGS+=-std=c11 -Wpedantic -Wall -Wextra -Wstrict-prototypes -Wshadow -Wconversion
+CFLAGS+=-std=c11 -pedantic-errors -Wpedantic -Wall -Wextra -Wstrict-prototypes -Wshadow -Wconversion
 # _LARGEFILE64_SOURCE may be considered obsolete
 CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
@@ -128,7 +128,7 @@ CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 all:	tree
 
 tree:	$(OBJS)
-	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS)
+	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS) -lws2_32
 
 $(OBJS): %.o:	%.c tree.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
