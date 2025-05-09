@@ -149,7 +149,8 @@ int main(int argc, char **argv)
   dirs[0] = 0;
   Level = -1;
 
-  setlocale(LC_CTYPE, "");
+  char *localecodeset;
+  localecodeset = setlocale(LC_CTYPE, "");
   setlocale(LC_COLLATE, "");
   /* Added by Efrey Kong
   *  For POSTIX environment
@@ -169,8 +170,6 @@ int main(int argc, char **argv)
   }
 
   if( charset == NULL ) {
-    setlocale(LC_CTYPE, "");
-    setlocale(LC_COLLATE, "");
 
     charset = getcharset();
 
@@ -179,6 +178,10 @@ int main(int argc, char **argv)
         strcmp(nl_langinfo(CODESET), "utf8") == 0)) {
     charset = "UTF-8";
     }
+  }
+
+  if (strcmp(localecodeset, charset) != 0 && strcmp(charset, "UTF-8") == 0) {
+      setlocale(LC_ALL, ".UTF-8");
   }
 
   lc = (struct listingcalls){
