@@ -44,6 +44,9 @@
 #include "mingw-w64/include/langinfo.h"
 #include "mingw-w64/include/unistd.h"
 #include <winsock2.h>
+// #ifdef WIN32
+#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
+// #endif
 #endif
 /******** end of adapt for mingw-w64*/
 #ifdef __EMX__  /* for OS/2 systems */
