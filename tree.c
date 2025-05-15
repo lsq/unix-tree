@@ -138,7 +138,7 @@ int main(int argc, char **argv)
   charset = getcharset();
   if (charset == NULL && 
        (strcmp(nl_langinfo(CODESET), "UTF-8") == 0 ||
-        strcmp(nl_langinfo(CODESET), "utf8") == 0) || strstr(localecodeset, "utf8")) {
+        strcmp(nl_langinfo(CODESET), "utf8") == 0 || strstr(localecodeset, "utf8"))) {
     charset = "UTF-8";
   }
 
