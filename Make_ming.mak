@@ -133,6 +133,9 @@ tree:	$(OBJS)
 $(OBJS): %.o:	%.c tree.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
+app.o: tree.rc
+	windres -i tree.rc -o app.o
+
 clean:
 	rm -f $(TREE_DEST) *.o *~
 
