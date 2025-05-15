@@ -17,6 +17,7 @@
  */
 
 #include "tree.h"
+#include <string.h>
 
 char *version = "$Version: $ tree v2.3.1 %s 1996 - 2026 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro $";
 char *hversion= "\t\t tree v2.3.1 %s 1996 - 2026 by Steve Baker and Thomas Moore <br>\n"
@@ -133,39 +134,16 @@ int main(int argc, char **argv)
   char *localecodeset;
   localecodeset = setlocale(LC_CTYPE, "");
   setlocale(LC_COLLATE, "");
-  /* Added by Efrey Kong
-  *  For POSTIX environment
-  */
-  char *strenv;
-  if ((strenv = getenv("LC_ALL")) || (strenv = getenv("LC_CTYPE")) || (strenv = getenv ("LANG")))    
-  {  
-    if (strstr(strenv, "UTF-8")) 
-      charset = "UTF-8"; 
-  }
-
-  /* Added by Efrey Kong
-  *  For GBK environment
-  */
-  if (charset == NULL && strcmp(nl_langinfo(CODESET), "CP936") == 0) {
-    charset = "GBK";
-  }
-
-  if( charset == NULL ) {
-
-    charset = getcharset();
-
-    if (charset == NULL && 
+  
+  charset = getcharset();
+  if (charset == NULL && 
        (strcmp(nl_langinfo(CODESET), "UTF-8") == 0 ||
-        strcmp(nl_langinfo(CODESET), "utf8") == 0)) {
+        strcmp(nl_langinfo(CODESET), "utf8") == 0) || strstr(localecodeset, "utf8")) {
     charset = "UTF-8";
-    }
   }
 
-  if (strcmp(localecodeset, charset) != 0 && strcmp(charset, "UTF-8") == 0) {
-      /* setlocale(LC_ALL, ".UTF-8"); */
-      charset = localecodeset;
-      if (strstr(charset, "936"))
-          charset = "GBK";
+  if (charset == NULL && (strcmp(nl_langinfo(CODESET), "CP936") == 0 || strstr(localecodeset, "936"))) {
+    charset = "GBK";
   }
 
   lc = (struct listingcalls){
