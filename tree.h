@@ -38,12 +38,12 @@
 #include <grp.h>
 #include <langinfo.h>
 #else
+#include <winsock2.h>
 #include "mingw-w64/include/stat.h"
 #include "mingw-w64/include/pwd.h"
 #include "mingw-w64/include/grp.h"
 #include "mingw-w64/include/langinfo.h"
 #include "mingw-w64/include/unistd.h"
-#include <winsock2.h>
 // #ifdef WIN32
 #define realpath(N,R) _fullpath((R),(N),PATH_MAX)
 // #endif
