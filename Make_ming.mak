@@ -129,8 +129,8 @@ CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
 all:	tree
 
-tree:	$(OBJS)
-	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS) -lws2_32
+tree:	$(OBJS) app.o
+	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS) app.o -lws2_32
 
 $(OBJS): %.o:	%.c tree.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
