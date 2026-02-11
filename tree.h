@@ -101,6 +101,10 @@
 
 #define UNUSED(x)	((void)x)
 
+#ifdef hyper
+#undef hyper
+#endif
+
 /* tree.c / global */
 struct Flags {
   // TODO: Change these single letter flags to more meaningful names
