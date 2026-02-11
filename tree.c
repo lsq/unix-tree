@@ -136,6 +136,7 @@ int main(int argc, char **argv)
   setlocale(LC_COLLATE, "");
   
   charset = getcharset();
+  fprintf(stderr, "tree.c: charset: %s\nlocalecodeset: %s\n", charset, localecodeset);
   if (charset == NULL && 
        (strcmp(nl_langinfo(CODESET), "UTF-8") == 0 ||
         strcmp(nl_langinfo(CODESET), "utf8") == 0 || strstr(localecodeset, "utf8"))) {

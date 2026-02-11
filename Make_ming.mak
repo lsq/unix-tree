@@ -52,10 +52,13 @@ OBJS += $(GNULIB_OBJS)
 # Uncomment options below for your particular OS:
 
 # Linux defaults:
-LDFLAGS?=-s
-CFLAGS?=-ggdb
-CFLAGS?=-O3
-CFLAGS+=-std=c11 -pedantic-errors -Wpedantic -Wall -Wextra -Wstrict-prototypes -Wshadow -Wconversion
+# LDFLAGS?=-s
+# CFLAGS?=-ggdb
+CFLAGS =-g
+# CFLAGS?=-O3
+CFLAGS +=-O0
+CFLAGS += -std=c11 -pedantic-errors -Wpedantic -Wall -Wextra -Wstrict-prototypes -Wshadow -Wconversion -fno-omit-frame-pointer
+CFLAGS += -ffunction-sections -fasynchronous-unwind-tables -fexceptions
 # _LARGEFILE64_SOURCE may be considered obsolete
 CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
@@ -129,8 +132,8 @@ CPPFLAGS+=-DLARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
 all:	tree
 
-tree:	$(OBJS)
-	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS) -lws2_32
+tree:	$(OBJS) app.o
+	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS) app.o -lws2_32
 
 $(OBJS): %.o:	%.c tree.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
